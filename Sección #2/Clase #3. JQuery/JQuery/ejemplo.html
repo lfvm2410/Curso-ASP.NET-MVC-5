@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Ejemplos de JQuery</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  </head>
+  <body>
+    <div id="div-1" class="div">
+      Dame click div ajax POST
+      <span id="span-ajax" class="span-1">
+        Span 1 AJAX: AJAX
+      </span>
+    </div>
+    <div id="div-2" class="div">
+      Texto de prueba
+      <span class="span-1">
+        Span 2
+      </span>
+    </div>
+    <a href="#" id="enlace">Soy un enlace</a>
+    <hr/>
+    <input type="text" id="caja-texto" value="" placeholder="Ingrese un contenido"/>
+    <div id="div-3">
+      Texto de prueba div 3
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function(){ //evento para cuando cargue la pagina
+        alert("Hola mundo");
+        $(".div").css("color", "blue"); //Pintar divs con clase div
+        $("#div-1 .span-1").css("color", "red"); //Pintar span 1 de div #1
+        $(".span-1").closest("#div-1").css("color", "yellow"); //Pintar div #1 padre de span-1. Closest busca el elemento hacia atras
+
+        $("#enlace").click(function(){ //evento click
+          alert("Soy un enlace");
+        });
+
+        $("#caja-texto").change(function(){ //evento change
+          alert($(this).val());
+        });
+
+        $("#caja-texto").hover(function(){ //evento hover
+          $(this).css('background', 'red'); //mouseenter
+        }, function(){
+          $(this).css('background', 'green'); //mousleave
+        });
+
+        $("#enlace").text("Dame click"); // Agregar texto
+        $("#enlace").html("<h1>Hola<h1/>"); //Agregar codigo HTML
+
+        $("#div-3").html("<span id='span-2'>Dame click por favor</span>");
+        $("#div-3").on("click", "#span-2", function(){ //asignar evento a objeto creado dinamicamente
+         alert("Me diste click");
+        })
+
+        //AJAX
+
+        //POST (GET tiene las mismas propiedades)
+        $("#div-1").click(function(){
+          $.post('ajax.php',{
+  			         action: 'traer_algo',
+                 a: 1,
+                 b: 2,
+                 c: 3
+  		          }, function(r){
+            			 alert(r.algo);
+  		          },'json');
+        });
+
+        //Con funcion AJAX
+        $("#span-ajax").click(function(){
+          $.ajax({
+            dataType: 'JSON',
+            type: 'POST',
+            data: {
+    			         action: 'traer_algo'
+                 },
+            url: 'ajax.php',
+            success: function(){
+              alert(r.algo);
+            },
+            error: function(jqXHR, textStatus, errorThrow){
+              console.log(textStatus + ' ' + errorThrow);
+            }
+          });
+        });
+
+      });
+    </script>
+  </body>
+</html>
