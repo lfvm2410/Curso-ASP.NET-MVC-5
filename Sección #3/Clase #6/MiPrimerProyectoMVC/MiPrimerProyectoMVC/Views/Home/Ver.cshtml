@@ -1,0 +1,28 @@
+﻿@model Model.Alumno
+@{
+    ViewBag.Title = "Ver";
+    //El metodo guardar en home mapea el modelo especificado en la vista,
+    //utilizando las propiedades especificadas en los html helpers
+}
+
+<h2>Alumno</h2>
+<h3>Parametro inicial: @ViewBag.id</h3>
+
+@using (Html.BeginForm("Guardar", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+
+    @Html.LabelFor(x => x.Nombre)
+    @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control" })
+
+    //Enviar parametro fuera de modelo
+    <input type="hidden" name="algo" value="1" />
+
+    //Enviar array al controlador
+    <input type="hidden" name="pruebaArray" value="1" />
+    <input type="hidden" name="pruebaArray" value="2" />
+    <input type="hidden" name="pruebaArray" value="3" />
+    <input type="hidden" name="pruebaArray" value="4" />
+
+    <button class="btn btn-primary" type="submit">Enviar</button>
+}

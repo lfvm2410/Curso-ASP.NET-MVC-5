@@ -1,3 +1,24 @@
-﻿<h2 class="page-header">
+﻿@model List<Model.Alumno>
+@{ 
+    //Cuando se le pasa un modelo desde el controlador, se especifica desde la vista
+    ViewBag.Title = "Inicio"; //Se le pasa valor a Layout
+    //Cuando se abren estas llaves se puede programar dentro de ellas
+    //Cuando se utiliza el @ es para imprimir un valor de cualquier indole
+    List<Model.Alumno> alumnos = ViewBag.Alumnos; //Se declara para no estar haciendo cast donde se usa
+    Model.Alumno alumno = ViewBag.Alumno;
+}
+
+<h2 class="page-header">
     Index
 </h2>
+
+<p>Hola, me pasaron este valor: <b>@ViewBag.Algo</b></p>
+
+<ul>
+    @foreach (var a in alumnos)
+    {
+        <li><b>Id</b>: @a.Id <b>Alumno</b>:  @a.Nombre</li>
+    }
+</ul>
+
+<p> Hola soy el alumno: <b>@alumno.Id</b>, y me llamo: <b>@alumno.Nombre</b></p>

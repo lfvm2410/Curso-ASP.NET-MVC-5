@@ -113,9 +113,10 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Alumno.cshtml" />
     <Content Include="Views\Shared\Layout.cshtml" />
     <Content Include="Views\_Viewstart.cshtml" />
+    <Content Include="Views\Home\Estudiante.cshtml" />
+    <Content Include="Views\Home\Ver.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
