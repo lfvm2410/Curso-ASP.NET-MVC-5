@@ -1,40 +1,95 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Model
 {
-    public class Alumno
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+    using System.Linq;
+
+    [Table("Alumno")]
+    public partial class Alumno
     {
-        public int Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Alumno()
+        {
+            Adjunto = new HashSet<Adjunto>();
+            AlumnoCurso = new HashSet<AlumnoCurso>();
+        }
+
+        public int id { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string Nombre { get; set; }
 
-        public static List<Alumno> Listar()
+        [Required]
+        [StringLength(100)]
+        public string Apellido { get; set; }
+
+        public int Sexo { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string FechaNacimiento { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Adjunto> Adjunto { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AlumnoCurso> AlumnoCurso { get; set; }
+
+        public List<Alumno> Listar()
         {
             var alumnos = new List<Alumno>();
 
-            for (var i = 0; i <= 10; i++)
+            try
             {
-                alumnos.Add(new Alumno()
+                using (var ctx = new TestContext())
                 {
-                    Id = i,
-                    Nombre = "Alumno " + i
-                });
+                    alumnos = ctx.Alumno.ToList();
+                }
+            }catch (Exception)
+            {
+                throw;
             }
 
             return alumnos;
-
         }
 
-        public static Alumno Obtener()
+        public Alumno Obtener(int id)
         {
-            return new Alumno
+            var alumno = new Alumno();
+
+            try
             {
-                Id = 1,
-                Nombre = "Alumno 1"
-            };
+                using (var ctx = new TestContext())
+                {
+                    /*
+                     * Cancelar lazy load
+                     * Lazy load puede acceder a propiedades y automaticamente se ejecutar 
+                     * una consulta que traiga lo relacionado a la propiedad
+                     * ctx.Configuration.LazyLoadingEnabled = false;
+                     * */
+
+                    /*El include permite incluir en la consulta la relación 
+                    de la tabla
+                    
+                    AlumnoCurso: Trae la relación
+                    AlumnoCurso.Curso: Trae la relación del AlumnoCurso con el Curso
+                     */
+                    alumno = ctx.Alumno.Include("AlumnoCurso")
+                                       .Include("AlumnoCurso.Curso")
+                                       .Where(x => x.id == id)
+                                       .SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return alumno;
         }
 
     }
