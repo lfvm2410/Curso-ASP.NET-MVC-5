@@ -24,23 +24,32 @@
     </div>
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Asignaturas tomadas</div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Cursos</th>
-                <th style="width:60px;">Nota</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var c in Model.AlumnoCurso)
-            {
+@if (Model.AlumnoCurso.Count > 0)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">Asignaturas tomadas</div>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@c.Curso.Nombre</td>
-                    <td class="text-right">@c.Nota</td>
+                    <th>Cursos</th>
+                    <th style="width:60px;">Nota</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.AlumnoCurso)
+                {
+                    <tr>
+                        <td>@c.Curso.Nombre</td>
+                        <td class="text-right">@c.Nota</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No hay cursos asignados a este alumno</p>
+}
+
+

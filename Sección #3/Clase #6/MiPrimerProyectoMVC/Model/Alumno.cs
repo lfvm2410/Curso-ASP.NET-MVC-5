@@ -4,6 +4,7 @@ namespace Model
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
     using System.Linq;
 
@@ -49,7 +50,8 @@ namespace Model
                 {
                     alumnos = ctx.Alumno.ToList();
                 }
-            }catch (Exception)
+            }
+            catch (Exception E)
             {
                 throw;
             }
@@ -84,12 +86,60 @@ namespace Model
                                        .SingleOrDefault();
                 }
             }
-            catch (Exception)
+            catch (Exception E)
             {
                 throw;
             }
 
             return alumno;
+        }
+
+        /*
+         * Trabaja con el id de la misma clase, haciendo referencia con this
+         * Tambien hace referencia al objeto con this
+         */
+        public void Guardar()
+        {
+            try
+            {
+                using(var ctx = new TestContext())
+                {
+                    if (this.id > 0)
+                    {
+                        ctx.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        ctx.Entry(this).State = EntityState.Added;
+                    }
+
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception E)
+            {
+                throw;
+            }
+        }
+
+        /*
+         * Trabaja con el id de la misma clase, haciendo referencia con this
+         * Tambien hace referencia al objeto con this
+         */
+        public void Eliminar()
+        {
+            try
+            {
+                using (var ctx = new TestContext())
+                {
+                    ctx.Entry(this).State = EntityState.Deleted;
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception E)
+            {
+                throw;
+            }
         }
 
     }

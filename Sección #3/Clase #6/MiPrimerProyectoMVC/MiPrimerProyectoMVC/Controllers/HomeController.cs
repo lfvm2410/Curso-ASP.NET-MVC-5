@@ -50,5 +50,36 @@ namespace MiPrimerProyectoMVC.Controllers
             //Redireccionar a otro metodo del controlador
             return Redirect("~/Home/Index");
         }
+
+
+        /*
+         * Accion para actualizar o insertar un registro
+         * Si el id viene vacio entonces se crea un nuevo alumno
+         * Si el id viene con informacion, se modifica el alumno existente
+         */
+        public ActionResult Crud(int id = 0)
+        {
+            return View(
+                id == 0 ? new Alumno()
+                        : alumno.Obtener(id)
+            );
+        }
+
+        //Como la vista esta ligada al modelo, entonces solo se llama al metodo guardar para utilizar su mismo contexto
+        public ActionResult GuardarAlumno(Alumno model)
+        {
+            model.Guardar();
+            //Redirige a index automaticamente por ser accion por defecto
+            return Redirect("~/home/VerAlumnos");
+        }
+
+        //Como la vista esta ligada al modelo, entonces solo se llama al metodo eliminar para utilizar su mismo contexto
+        public ActionResult EliminarAlumno(int id)
+        {
+            alumno.id = id;
+            alumno.Eliminar();
+            //Redirige a index automaticamente por ser accion por defecto
+            return Redirect("~/home/VerAlumnos");
+        }
     }
 }
