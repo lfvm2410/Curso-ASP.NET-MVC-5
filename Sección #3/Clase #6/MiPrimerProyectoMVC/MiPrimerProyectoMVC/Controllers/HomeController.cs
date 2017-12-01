@@ -68,9 +68,19 @@ namespace MiPrimerProyectoMVC.Controllers
         //Como la vista esta ligada al modelo, entonces solo se llama al metodo guardar para utilizar su mismo contexto
         public ActionResult GuardarAlumno(Alumno model)
         {
-            model.Guardar();
-            //Redirige a index automaticamente por ser accion por defecto
-            return Redirect("~/home/VerAlumnos");
+            if (ModelState.IsValid)
+            {
+                model.Guardar();
+                //Redirige a index automaticamente por ser accion por defecto
+                return Redirect("~/home/VerAlumnos");
+            }
+            else
+            {
+                //Se le pasa el modelo a la vista para que lo tenga asignado al llamarla
+                //Tambien se le pasa el modelo para que la vista muestre los campos de validacion
+                return View("~/views/home/crud.cshtml", model);
+            }
+            
         }
 
         //Como la vista esta ligada al modelo, entonces solo se llama al metodo eliminar para utilizar su mismo contexto

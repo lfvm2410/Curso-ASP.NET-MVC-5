@@ -18,10 +18,13 @@
             <div class="form-group">
                 @Html.LabelFor(x => x.Nombre)
                 @Html.TextBoxFor(x => x.Nombre, new { @class = "form-control" })
+                <!-- null: Se puede personalizar el contenido del mensaje a mostrar -->
+                @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "label label-danger" }) 
             </div>
             <div class="form-group">
                 @Html.LabelFor(x => x.Apellido)
                 @Html.TextBoxFor(x => x.Apellido, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Apellido, null, new { @class = "label label-danger" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(x => x.Sexo)
@@ -33,6 +36,7 @@
             <div class="form-group">
                 @Html.LabelFor(x => x.FechaNacimiento)
                 @Html.TextBoxFor(x => x.FechaNacimiento, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.FechaNacimiento, null, new { @class = "label label-danger" })
             </div>
         </div>
     </div>
@@ -41,3 +45,26 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 }
+
+<script>
+    $(document).ready(function () {
+        $("#frm-alumno").submit(function () {
+
+            var form = $(this); //Se guarda el formulario
+
+            $.ajax({
+                dataType: 'JSON',
+                type: 'POST',
+                url: form.attr('action'), // -- /Home/GuardarAlumno
+                success: function () {
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus + " " + errorThrown);
+                }
+            })
+
+            return false; //Cancelar postback
+        })
+    })
+</script>
