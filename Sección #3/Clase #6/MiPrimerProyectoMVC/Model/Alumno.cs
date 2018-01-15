@@ -98,7 +98,7 @@ namespace Model
          * Trabaja con el id de la misma clase, haciendo referencia con this
          * Tambien hace referencia al objeto con this
          */
-        public void Guardar()
+        /*public void Guardar()
         {
             try
             {
@@ -120,6 +120,38 @@ namespace Model
             {
                 throw;
             }
+        }*/
+
+        //Acondicionado para responder a una solicitud ajax en formato json
+        public ResponseModel Guardar()
+        {
+            //Por defecto se setea como respuesta con errores. Cuando llega a exito, se cambia a respuesta debida
+            var rm = new ResponseModel();
+
+            try
+            {
+                using (var ctx = new TestContext())
+                {
+                    if (this.id > 0)
+                    {
+                        ctx.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        ctx.Entry(this).State = EntityState.Added;
+                    }
+
+                    //Hasta este punto no hay errores. Por lo tanto se cambia el objeto a true para no responder con error
+                    rm.SetResponse(true);
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception E)
+            {
+                throw;
+            }
+
+            return rm;
         }
 
         /*

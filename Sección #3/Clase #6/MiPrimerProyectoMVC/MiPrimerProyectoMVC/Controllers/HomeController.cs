@@ -66,7 +66,7 @@ namespace MiPrimerProyectoMVC.Controllers
         }
 
         //Como la vista esta ligada al modelo, entonces solo se llama al metodo guardar para utilizar su mismo contexto
-        public ActionResult GuardarAlumno(Alumno model)
+        /*public ActionResult GuardarAlumno(Alumno model)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,29 @@ namespace MiPrimerProyectoMVC.Controllers
                 return View("~/views/home/crud.cshtml", model);
             }
             
+        }*/
+
+        //Se guarda el alumno pero se devuelve un objeto json
+        public JsonResult GuardarAlumno(Alumno model)
+        {
+            var rm = new ResponseModel();
+
+            if (ModelState.IsValid)
+            {
+                rm = model.Guardar();
+
+                if (rm.response)
+                {
+                    //rm.function = "SoyAlgo()";
+                    rm.href = Url.Content("~/home/VerAlumnos");
+                }
+
+            }
+
+            //Serializar objeto
+            return Json(rm);
         }
+
 
         //Como la vista esta ligada al modelo, entonces solo se llama al metodo eliminar para utilizar su mismo contexto
         public ActionResult EliminarAlumno(int id)
