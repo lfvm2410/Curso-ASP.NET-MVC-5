@@ -11,6 +11,8 @@ namespace MiPrimerProyectoMVC.Controllers
     {
 
         private Alumno alumno = new Alumno();
+        private AlumnoCurso alumnoCurso = new AlumnoCurso();
+        private Curso curso = new Curso();
         
         // GET: Home
         //Action Result permite retornar vistas
@@ -43,6 +45,63 @@ namespace MiPrimerProyectoMVC.Controllers
             ViewBag.id = id;
 
             return View(alumno.Obtener(id));
+        }
+
+        //Retorno de vista parcial
+        public PartialViewResult Cursos(int Alumno_id)
+        {
+            //Listamos los cursos de un alumno
+            ViewBag.CursosElegidos = alumnoCurso.Listar(Alumno_id);
+            
+            //Listamos todos los cursos DISPONIBLES
+            ViewBag.Cursos = curso.Todos(Alumno_id);
+
+            //Modelo
+            alumnoCurso.id = Alumno_id;
+
+            return PartialView(alumnoCurso); //Retorna la vista parcial
+        }
+
+        //Se guardan los cursos del alumno en modo de edición
+        public JsonResult GuardarCurso(AlumnoCurso model)
+        {
+            var rm = new ResponseModel();
+
+            if (ModelState.IsValid)
+            {
+                rm = model.Guardar();
+
+                if (rm.response)
+                {
+                    rm.function = "CargarCursos();";
+                }
+
+            }
+
+            //Serializar objeto
+            return Json(rm);
+        }
+
+        //Eliminar alumno de curso
+        public JsonResult EliminarAlumnoCurso(int id)
+        {
+            var rm = new ResponseModel();
+            alumnoCurso.id = id;
+
+            if (ModelState.IsValid)
+            {
+                rm = alumnoCurso.Eliminar();
+
+                if (rm.response)
+                {
+                    rm.function = "CargarCursos();";
+                    rm.message = "Se ha eliminado el curso correctamente";
+                }
+
+            }
+
+            //Serializar objeto
+            return Json(rm);
         }
 
         public ActionResult Guardar(Alumno alumno, int algo, int[] pruebaArray)
