@@ -6,7 +6,7 @@ $(document).ready(function () {
 
         // El metodo .data identifica la entrada y la castea al valor más correcto
         if ($(this).data('ajax') != true) return;
-
+        
         var form = $(this).closest("form");
         var buttons = $("button", form);
         var button = $(this);
@@ -27,9 +27,9 @@ $(document).ready(function () {
             {
                 url = button.data('url');
             }
-        }else
+        } else
         {
-            if (!form.validate()) {
+            if (!form.valid()) {
                 return false;
             }
         }

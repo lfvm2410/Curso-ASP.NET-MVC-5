@@ -39,7 +39,14 @@
     {
        <li class="list-group-item">
            @ce.Curso.Nombre
-           <a onclick="eliminarAlumnoCurso($(this),'¿Desea eliminar este registro?');" class="btn btn-xs btn-danger" href="~/Home/EliminarAlumnoCurso" data-value="@ce.id">Eliminar</a>
+           <div class="pull-right" style="margin-left: 0.5%;">
+               <button onclick="eliminarAlumnoCurso($(this));"
+                       class="btn btn-xs btn-danger"
+                       data-url='@Url.Content("~/Home/EliminarAlumnoCurso/" + @ce.id)'
+                       data-confirm="¿Desea eliminar este registro?">
+                   Eliminar
+               </button>
+           </div>
            <span class="badge pull-right">@ce.Nota</span>
        </li>
     }
@@ -50,26 +57,20 @@
         //Como es una vista parcial, el document ready del layout no aplica validación sobre el dado a que se carga luego del evento
         //Para activar la validación en esta vista es necesario agregarsela acá
         $.validator.unobtrusive.parse("#frm-curso");
-    })
+    });
 
-    function eliminarAlumnoCurso(idElement, confirmMessage) {
+    function eliminarAlumnoCurso(idElement) {
 
-        if (confirm(confirmMessage)) {
+        if (confirm(idElement.attr('data-confirm'))) {
 
             $.ajax({
                 dataType: 'JSON',
                 type: 'POST',
-                url: idElement.attr('href'),
-                data: {
-                    id: idElement.attr('data-value') 
-                },
+                url: idElement.attr('data-url'),
                 success: function (r) {
                     if (r.response) {
-
                         if (r.message != null) {
-
                             alert(r.message);
-
                         }
 
                     } else {
@@ -85,9 +86,10 @@
                     console.log(textStatus + " " + errorThrown);
                 }
             })
-        }
 
-        return false; //Cancelar postback
+            return false; //Cancelar postback
+
+        }
 
     }
 </script>
