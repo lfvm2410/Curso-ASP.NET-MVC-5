@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Model;
+using System.IO;
 
 namespace MiPrimerProyectoMVC.Controllers
 {
@@ -48,18 +49,62 @@ namespace MiPrimerProyectoMVC.Controllers
         }
 
         //Retorno de vista parcial
-        public PartialViewResult Cursos(int Alumno_id)
+        public ActionResult Cursos(AlumnoCurso alumnoCurso)
         {
             //Listamos los cursos de un alumno
-            ViewBag.CursosElegidos = alumnoCurso.Listar(Alumno_id);
+            ViewBag.CursosElegidos = alumnoCurso.Listar(alumnoCurso.Alumno_id);
             
             //Listamos todos los cursos DISPONIBLES
-            ViewBag.Cursos = curso.Todos(Alumno_id);
+            ViewBag.Cursos = curso.Todos(alumnoCurso);
 
-            //Modelo
-            alumnoCurso.id = Alumno_id;
+            if (Request.IsAjaxRequest())
+            {
+                var rm = new ResponseModel();
 
-            return PartialView(alumnoCurso); //Retorna la vista parcial
+                rm.SetResponse(true);
+                rm.message = RenderPartialViewToString("Cursos", alumnoCurso);
+
+                //Retorna la vista parcial en application/json
+                return Json(rm);
+            }
+            else
+            {
+                //Retorna la vista parcial en text/html
+                return PartialView(alumnoCurso); 
+            }
+            
+        }
+
+        //Metodo que convierte a string una partialview
+        protected string RenderPartialViewToString(string viewName, object model)
+        {
+            //Se le especifica el modelo a la vista parcial con ViewData para luego operar con el contexto
+            ViewData.Model = model;
+
+            using (var sw = new StringWriter())
+            {
+                //Encontrar la vista parcial
+                //ControllerContext: Contexto del controlador, entorno
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+
+                /* ViewContext: Contexto de la vista
+                 * ViewData: Son los datos de vista que se pasan a la vista
+                 * TempData: Datos asociados a la solicitud actual, solo para ella
+                 * Writer: Obtiene o establece el objeto para escribir la salida a HTML
+                 */
+
+                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+
+                //Renderiza la vista al string writer asociado
+                viewResult.View.Render(viewContext, sw);
+
+                //Libera la vista usando el contexto del controlador
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+
+                //Se retorna la vista en string
+                return sw.GetStringBuilder().ToString();
+                 
+            }
         }
 
         //Se guardan los cursos del alumno en modo de edición

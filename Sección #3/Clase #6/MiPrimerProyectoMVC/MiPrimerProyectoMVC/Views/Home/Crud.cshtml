@@ -60,9 +60,31 @@
     </div>
     @if (Model.id > 0)
     {
-        <div role="tabpanel" class="tab-pane" id="cursos"></div>
+        <div role="tabpanel" class="tab-pane" id="cursos"
+             data-url="@Url.Content("~/home/cursos/")"
+             data-id="0"
+             data-alumnoid="@Model.id"
+             data-cursoid="0"
+             data-nota="0">
+        </div>
+       
     }
 </div>
+
+@if (Model.id > 0)
+{
+    <div id="modalEdicionNotaCurso" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edición de asignatura</h4>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+}
 
 <script>
     $(document).ready(function () {
@@ -73,9 +95,57 @@
             </text>
         }
     })
+
     function CargarCursos()
     {
-        $("#cursos").load('@Url.Content("~/home/cursos/?Alumno_id=" + Model.id)');
+        renderPartialView($("#cursos"), $("#cursos")); 
+    }
+
+    function renderPartialView(idElement, idElementRendered) {
+
+        if (idElementRendered.is(':visible')) {
+            //Cerrar ventana modal si se encuentra abierta
+            $(".modal").modal("hide");
+        }
+
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'JSON',
+            url: idElement.attr('data-url'),
+            data: "{ alumnoCurso:" + JSON.stringify(objetoAlumnoCurso(idElement)) + "}",
+            success: function (r) {
+                if (r.response) {
+                    idElementRendered.html(r.message); 
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus + " " + errorThrown);
+            }
+
+        })
+        
+    }
+
+    function objetoAlumnoCurso(idElement) {
+
+        var alumnoCurso = new Object();
+
+        alumnoCurso.id = idElement.attr("data-id");
+        alumnoCurso.Alumno_id = idElement.attr("data-alumnoid");
+        alumnoCurso.Curso_id = idElement.attr("data-cursoid");
+        alumnoCurso.Nota = idElement.attr("data-nota");
+        alumnoCurso.Alumno = null;
+        alumnoCurso.Curso = null;
+
+        return alumnoCurso;
+
+    }
+
+    function cargarModalEdicionAlumnoCurso() {
+
+       $(".modal-body").load('@Url.Content("~/home/cursos/?Alumno_id=" + Model.id + "&Editar_nota_curso=true")');
+
     }
 </script>
 

@@ -25,7 +25,6 @@ namespace Model
 
         public virtual Curso Curso { get; set; }
 
-
         //Guardar los cursos de un alumno en edición. En la tabla de relacion n:m
         public ResponseModel Guardar()
         {
@@ -36,7 +35,15 @@ namespace Model
             {
                 using (var ctx = new TestContext())
                 {
-                    ctx.Entry(this).State = EntityState.Added;
+
+                    if (this.id > 0)
+                    {
+                        ctx.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        ctx.Entry(this).State = EntityState.Added;
+                    }
                     
                     rm.SetResponse(true);
                     ctx.SaveChanges();

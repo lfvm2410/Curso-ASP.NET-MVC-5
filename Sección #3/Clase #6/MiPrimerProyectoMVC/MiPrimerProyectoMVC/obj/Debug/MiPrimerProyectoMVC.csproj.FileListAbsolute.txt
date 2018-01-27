@@ -1,3 +1,5 @@
+E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\obj\Debug\MiPrimerProyectoMVC.csprojResolveAssemblyReference.cache
+E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\obj\Debug\MiPrimerProyectoMVC.csproj.CoreCompileInputs.cache
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\roslyn\csc.exe
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\roslyn\csc.exe.config
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\roslyn\csc.rsp
@@ -49,6 +51,8 @@ E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPr
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\MiPrimerProyectoMVC.dll.config
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\MiPrimerProyectoMVC.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\MiPrimerProyectoMVC.pdb
+E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\EntityFramework.dll
+E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\EntityFramework.SqlServer.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\Microsoft.Web.Infrastructure.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\Model.dll
@@ -59,6 +63,8 @@ E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPr
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\System.Web.Webpages.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\System.Web.Webpages.Razor.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\Model.pdb
+E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\EntityFramework.xml
+E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\EntityFramework.SqlServer.xml
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\System.Web.Razor.xml
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\System.Web.Webpages.xml
@@ -72,11 +78,5 @@ E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPr
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\es\System.Web.Webpages.Razor.resources.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\es\System.Web.Helpers.resources.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\es\System.Web.Mvc.resources.dll
-E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\obj\Debug\MiPrimerProyectoMVC.csprojResolveAssemblyReference.cache
-E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\obj\Debug\MiPrimerProyectoMVC.csproj.CoreCompileInputs.cache
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\obj\Debug\MiPrimerProyectoMVC.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\obj\Debug\MiPrimerProyectoMVC.pdb
-E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\EntityFramework.dll
-E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\EntityFramework.xml
-E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\EntityFramework.SqlServer.dll
-E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\MiPrimerProyectoMVC\bin\EntityFramework.SqlServer.xml

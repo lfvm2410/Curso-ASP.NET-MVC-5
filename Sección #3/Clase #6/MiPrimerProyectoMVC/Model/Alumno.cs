@@ -69,7 +69,7 @@ namespace Model
                 {
                     /*
                      * Cancelar lazy load
-                     * Lazy load puede acceder a propiedades y automaticamente se ejecutar 
+                     * Lazy load puede acceder a propiedades y automaticamente se ejecuta 
                      * una consulta que traiga lo relacionado a la propiedad
                      * ctx.Configuration.LazyLoadingEnabled = false;
                      * */

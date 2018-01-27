@@ -7,18 +7,37 @@
 @if (cursos.Count > 0)
 {
 
-    using (Html.BeginForm("GuardarCurso", "Home", FormMethod.Post, new { id = "frm-curso" }))
+    using (Html.BeginForm("GuardarCurso", "Home", FormMethod.Post, new { id = "frm-curso"+Model.id }))
     {
+        @Html.HiddenFor(x => x.id)
         @Html.HiddenFor(x => x.Alumno_id)
-        <div class="form-group">
-            <label>Seleccione un curso</label>
-            <select class="form-control" name="Curso_id">
-                @foreach (var c in cursos)
+
+        if(Model.id <= 0) { 
+            <div class="form-group">
+                <label>Seleccione un curso</label>
+                <select class="form-control" name="Curso_id">
+                    @foreach (var c in cursos)
+                    {
+                        <option value="@c.id">@c.Nombre</option>
+                    }
+                </select>
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(x => x.Curso_id)
+
+            foreach (var c in cursos)
+            {
+                if(c.id == Model.Curso_id)
                 {
-                    <option value="@c.id">@c.Nombre</option>
+                    <input type="text" class="form-control" value="@c.Nombre" readonly/>
+                    break;
                 }
-            </select>
-        </div>
+                
+            }
+        }
+
         <div class="form-group">
             @Html.LabelFor(x => x.Nota)
             @Html.TextBoxFor(x => x.Nota, new { @class = "form-control" })
@@ -26,7 +45,7 @@
         </div>
 
         <div class="text-right">
-            <button data-ajax="true" data-confirm="¿Esta seguro de asignar este curso al alumno?" type="submit" class="btn btn-primary">Guardar</button>
+            <button data-ajax="true" data-confirm="¿Esta seguro de proceder con el registro?" type="submit" class="btn btn-primary">Guardar</button>
         </div>
     }
     <hr />
@@ -34,31 +53,44 @@
 }
 
 <!-- CURSOS ELEGIDOS -->
-<ul class="list-group">
-    @foreach (var ce in cursosElegidos)
-    {
-       <li class="list-group-item">
-           @ce.Curso.Nombre
-           <div class="pull-right" style="margin-left: 0.5%;">
-               <button onclick="eliminarAlumnoCurso($(this));"
-                       class="btn btn-xs btn-danger"
-                       data-url='@Url.Content("~/Home/EliminarAlumnoCurso/" + @ce.id)'
-                       data-confirm="¿Desea eliminar este registro?">
-                   Eliminar
-               </button>
-           </div>
-           <span class="badge pull-right">@ce.Nota</span>
-       </li>
-    }
-</ul>
+
+@if (Model.id <= 0)
+{
+    <ul class="list-group">
+        @foreach (var ce in cursosElegidos)
+        {
+            <li class="list-group-item">
+                @ce.Curso.Nombre
+                <div class="pull-right" style="margin-left: 0.5%;">
+                    <button onclick="renderPartialView($(this), $('.modal-body'));" 
+                            class="btn btn-xs btn-primary" 
+                            data-url="@Url.Content("~/home/cursos/")"
+                            data-id="@ce.id"
+                            data-alumnoid="@ce.Alumno_id"
+                            data-cursoid="@ce.Curso_id"
+                            data-nota="@ce.Nota"
+                            data-toggle="modal" 
+                            data-target="#modalEdicionNotaCurso">Editar</button>
+                    <button onclick="eliminarAlumnoCurso($(this));"
+                            class="btn btn-xs btn-danger"
+                            data-url='@Url.Content("~/Home/EliminarAlumnoCurso/" + @ce.id)'
+                            data-confirm="¿Desea eliminar este registro?">
+                        Eliminar
+                    </button>
+                </div>
+                <span class="badge pull-right">@ce.Nota</span>
+            </li>
+        }
+    </ul>
+}
 
 <script>
     $(document).ready(function () {
         //Como es una vista parcial, el document ready del layout no aplica validación sobre el dado a que se carga luego del evento
         //Para activar la validación en esta vista es necesario agregarsela acá
-        $.validator.unobtrusive.parse("#frm-curso");
+        $.validator.unobtrusive.parse("#frm-curso"+@Model.id);
     });
-
+    
     function eliminarAlumnoCurso(idElement) {
 
         if (confirm(idElement.attr('data-confirm'))) {
