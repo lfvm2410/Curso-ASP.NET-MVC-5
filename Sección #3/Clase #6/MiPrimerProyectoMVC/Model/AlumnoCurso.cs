@@ -57,7 +57,6 @@ namespace Model
             return rm;
         }
 
-
         //Se trae los cursos relacionados a un alumno
         public List<AlumnoCurso> Listar(int Alumno_id)
         {

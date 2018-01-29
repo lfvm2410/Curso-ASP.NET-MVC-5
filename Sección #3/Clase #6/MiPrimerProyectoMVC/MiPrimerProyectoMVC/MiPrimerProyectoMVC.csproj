@@ -133,6 +133,7 @@
     <Content Include="Views\Home\VerAlumno.cshtml" />
     <Content Include="Views\Home\Crud.cshtml" />
     <Content Include="Views\Home\Cursos.cshtml" />
+    <Content Include="Views\Home\Adjuntos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

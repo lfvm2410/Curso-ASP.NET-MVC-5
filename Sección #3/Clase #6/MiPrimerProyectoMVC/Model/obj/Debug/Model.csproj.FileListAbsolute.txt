@@ -7,3 +7,4 @@ E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPr
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\Model\obj\Debug\Model.dll
 E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\Model\obj\Debug\Model.pdb
+E:\Mi biblioteca\Documentos\GitHub\Curso-ASP.NET-MVC-5\Sección #3\Clase #6\MiPrimerProyectoMVC\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

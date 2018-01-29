@@ -14,6 +14,7 @@
     @if (Model.id > 0)
     {
         <li role="presentation"><a href="#cursos" aria-controls="cursos" role="tab" data-toggle="tab">Cursos</a></li>
+        <li role="presentation"><a href="#adjuntos" aria-controls="adjuntos" role="tab" data-toggle="tab">Adjuntos</a></li>
     }
 </ul>
 
@@ -67,7 +68,7 @@
              data-cursoid="0"
              data-nota="0">
         </div>
-       
+        <div role="tabpanel" class="tab-pane" id="adjuntos"></div>
     }
 </div>
 
@@ -91,7 +92,8 @@
         @if (Model.id > 0)
         { //Se agregan las etiquetas text para que se interprete lo que hay dentro como codigo js
             <text>
-            CargarCursos();
+        CargarCursos();
+        CargarAdjuntos();
             </text>
         }
     })
@@ -99,6 +101,10 @@
     function CargarCursos()
     {
         renderPartialView($("#cursos"), $("#cursos")); 
+    }
+
+    function CargarAdjuntos() {
+        $("#adjuntos").load('@Url.Content("~/home/adjuntos/?Alumno_id=" + Model.id)');
     }
 
     function renderPartialView(idElement, idElementRendered) {

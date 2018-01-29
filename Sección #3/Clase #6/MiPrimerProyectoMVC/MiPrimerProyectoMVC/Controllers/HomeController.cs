@@ -14,7 +14,8 @@ namespace MiPrimerProyectoMVC.Controllers
         private Alumno alumno = new Alumno();
         private AlumnoCurso alumnoCurso = new AlumnoCurso();
         private Curso curso = new Curso();
-        
+        private Adjunto adjunto = new Adjunto();
+
         // GET: Home
         //Action Result permite retornar vistas
         public ActionResult Index()
@@ -37,7 +38,7 @@ namespace MiPrimerProyectoMVC.Controllers
 
         //home/ver/1
         public ActionResult VerAlumno(int id = 0)
-        { 
+        {
             return View(alumno.Obtener(id));
         }
 
@@ -53,7 +54,7 @@ namespace MiPrimerProyectoMVC.Controllers
         {
             //Listamos los cursos de un alumno
             ViewBag.CursosElegidos = alumnoCurso.Listar(alumnoCurso.Alumno_id);
-            
+
             //Listamos todos los cursos DISPONIBLES
             ViewBag.Cursos = curso.Todos(alumnoCurso);
 
@@ -70,9 +71,9 @@ namespace MiPrimerProyectoMVC.Controllers
             else
             {
                 //Retorna la vista parcial en text/html
-                return PartialView(alumnoCurso); 
+                return PartialView(alumnoCurso);
             }
-            
+
         }
 
         //Metodo que convierte a string una partialview
@@ -103,8 +104,52 @@ namespace MiPrimerProyectoMVC.Controllers
 
                 //Se retorna la vista en string
                 return sw.GetStringBuilder().ToString();
-                 
+
             }
+        }
+
+        // Vista parcial de adjuntos
+        // home/Adjuntos/?Alumno_id=1
+        public PartialViewResult Adjuntos(int Alumno_id)
+        {
+            ViewBag.Adjuntos = adjunto.Listar(Alumno_id);
+
+            return PartialView(adjunto);
+        }
+
+        //Se guardan los alumnos del alumno en modo de edición
+        //HttpPostedFileBase name debe coincidir con el name de la etiqueta file en el form
+        public JsonResult GuardarAdjunto(Adjunto model, HttpPostedFileBase Archivo)
+        {
+            var rm = new ResponseModel();
+
+            // Validar si viene o no el archivo
+            if (Archivo != null)
+            {
+                //Nombre archivo: Fecha exacta actual más extensión de archivo
+                string archivo = DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetExtension(Archivo.FileName);
+                
+                //Guardar archivo en la ruta con un nombre único
+                //MapPath: Devuelve ruta de acceso especificada de acuerdo a la que necesita al servidor
+                Archivo.SaveAs(Server.MapPath("~/uploads/" + archivo));
+
+                //Se le indica el nombre del archivo al modelo
+                model.Archivo = archivo;
+                     
+                rm = model.Guardar();
+
+                if (rm.response)
+                {
+                    rm.function = "CargarAdjuntos();";
+                }
+            }
+            else
+            {
+                rm.SetResponse(false, "Debe adjuntar un archivo");
+            }
+
+            //Serializar objeto
+            return Json(rm);
         }
 
         //Se guardan los cursos del alumno en modo de edición
